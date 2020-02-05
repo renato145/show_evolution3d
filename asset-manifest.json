@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/show_evolution3d/static/css/main.dd6990f2.chunk.css",
+    "main.js": "/show_evolution3d/static/js/main.1908c0f6.chunk.js",
+    "main.js.map": "/show_evolution3d/static/js/main.1908c0f6.chunk.js.map",
+    "runtime-main.js": "/show_evolution3d/static/js/runtime-main.86ecfa33.js",
+    "runtime-main.js.map": "/show_evolution3d/static/js/runtime-main.86ecfa33.js.map",
+    "static/css/2.64a99b10.chunk.css": "/show_evolution3d/static/css/2.64a99b10.chunk.css",
+    "static/js/2.6c7c93aa.chunk.js": "/show_evolution3d/static/js/2.6c7c93aa.chunk.js",
+    "static/js/2.6c7c93aa.chunk.js.map": "/show_evolution3d/static/js/2.6c7c93aa.chunk.js.map",
+    "index.html": "/show_evolution3d/index.html",
+    "precache-manifest.7a4ada42ff0c98625373641b6b795542.js": "/show_evolution3d/precache-manifest.7a4ada42ff0c98625373641b6b795542.js",
+    "service-worker.js": "/show_evolution3d/service-worker.js",
+    "static/css/2.64a99b10.chunk.css.map": "/show_evolution3d/static/css/2.64a99b10.chunk.css.map",
+    "static/css/main.dd6990f2.chunk.css.map": "/show_evolution3d/static/css/main.dd6990f2.chunk.css.map",
+    "static/js/2.6c7c93aa.chunk.js.LICENSE": "/show_evolution3d/static/js/2.6c7c93aa.chunk.js.LICENSE"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.86ecfa33.js",
+    "static/css/2.64a99b10.chunk.css",
+    "static/js/2.6c7c93aa.chunk.js",
+    "static/css/main.dd6990f2.chunk.css",
+    "static/js/main.1908c0f6.chunk.js"
+  ]
+}
