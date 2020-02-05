@@ -11,7 +11,7 @@ import { ThreeVis } from './ThreeVis/ThreeVis';
 
 // controls
 const defaultSpeed = 250;
-const defaultSphereSize = 1
+const defaultSphereSize = 2
 const speedStep = 25;
 const minSpeed = 25;
 const maxSpeed = 2500;
@@ -65,7 +65,7 @@ const App = () => {
           <GeneralSlider
             className={'col-1 offset-1'}
             min={0.25}
-            max={5}
+            max={8}
             now={sphereSize}
             step={sphereSizeStep}
             valueLabelFormat={d => `${d.toFixed(2)} sz`}

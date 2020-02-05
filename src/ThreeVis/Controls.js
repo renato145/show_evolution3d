@@ -10,7 +10,7 @@ const ALT_KEY = 18;
 const CTRL_KEY = 17;
 const CMD_KEY = 91;
 
-export const Controls = ({ minDistance, maxDistance }) => {
+export const Controls = ({ minDistance, maxDistance, defaultPosition }) => {
   const controls = useRef();
   const { camera, gl } = useThree();
 
@@ -24,7 +24,7 @@ export const Controls = ({ minDistance, maxDistance }) => {
     view.on('dblclick.zoom', () => {
       // reset look-at (target) and camera position
       controls.current.target.set(0, 0, 0);
-      camera.position.set(0, 0, 80);
+      camera.position.set(...defaultPosition);
 
       // needed for trackball controls, reset the up vector
       camera.up.set(
@@ -33,7 +33,7 @@ export const Controls = ({ minDistance, maxDistance }) => {
         controls.current.up0.z
       );
     });
-  }, [ gl, camera ])
+  }, [ gl, camera, defaultPosition ])
 
   return (
     <trackballControls

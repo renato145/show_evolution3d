@@ -1,53 +1,34 @@
-import React, { useRef } from 'react';
-import { useThree, Dom } from 'react-three-fiber';
-import { a } from 'react-spring/three';
-import { getClientPosition, getCanvasPosition } from './utils';
+import React, { useRef, useMemo } from 'react';
+import { Dom, useThree } from 'react-three-fiber';
+import { getCanvasPosition } from './utils';
+const THREE = require('three');
 
 const margin = 10;
 
 export const HoverDialog = ({ pointsAnim, selectedPoint, pointsData }) => {
   const hoverRef = useRef();
-  const { size, camera, aspect } = useThree();
   const { show, index } = selectedPoint;
+  const { size, camera } = useThree();
+  const position = useMemo(() => {
+    const clientPosition = new THREE.Vector3(size.width, 200, 0)
+    console.log(clientPosition);
+    const a = getCanvasPosition(clientPosition, size, camera);
+    console.log(a);
+    return a;
+  }, [ size, camera ]);
+  console.log(position);
 
   return (
-    <a.group
-      position={pointsAnim.interpolate((...d) => {
-        const point = d.slice(index*3, (index+1)*3).map((o,i) => i%3===0 ? o*aspect : o);
-        const clientPosition = getClientPosition(point, size, camera);
-        clientPosition.y -= margin;
-        if ( hoverRef.current ) {
-          const { clientHeight, clientWidth } = hoverRef.current;
-          const position = {
-            left: clientPosition.x - clientWidth/2,
-            right: clientPosition.x + clientWidth/2,
-            top: clientPosition.y,
-            bottom: clientPosition.y - clientHeight,
-          };
-          if ( position.left < 0 ) {
-            clientPosition.x -= position.left;
-          } else if ( position.right > size.width ) {
-            clientPosition.x -= position.right - size.width;
-          }
-          if ( position.bottom < 0 ) {
-            clientPosition.y += 2*margin + clientHeight;
-          }
-        }
-
-        return getCanvasPosition(clientPosition, size, camera);
-      })}
+    <Dom
+      position={[5, 0, 0]}
+      style={{
+        display: show ? 'block' : 'none'
+      }}
+      ref={hoverRef}
     >
-      <Dom
-        center={true}
-        style={{
-          transform: `translate3d(-50%, ${ show ? 0 : '1000%' }, 0)`, // Dirty trick to hide the dialog outside of canvas view
-        }}
-        ref={hoverRef}
-      >
-        <div className='hover-description'>
-          { pointsData[index] }
-        </div>
-      </Dom>
-    </a.group>
+      <div className='hover-description'>
+        { pointsData[index] }
+      </div>
+    </Dom>
   );
 };
