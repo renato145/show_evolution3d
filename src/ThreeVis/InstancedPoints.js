@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useMemo } from 'react';
 import { useThree } from 'react-three-fiber';
 import { useSpring, a } from 'react-spring/three';
 import { useMousePointInteraction } from './useMousePointInteraction';
-import { HoverDialog } from './HoverDialog';
+import { combinations } from './utils';
 const THREE = require('three');
 
 // settings
@@ -13,7 +13,7 @@ const selectedPointSize = 2;
 const scratchObject3D = new THREE.Object3D();
 
 const updateInstancedMeshMatrices = ({
-  sphereSize, aspect, mesh, points, colors, colorAttrib, colorArray, selectedPoint
+  sphereSize, mesh, points, colors, colorAttrib, colorArray, selectedPoint
 }) => {
   if (!mesh) return;
   const { show, index } = selectedPoint;
@@ -21,7 +21,6 @@ const updateInstancedMeshMatrices = ({
 
   [...Array(points.length/3)].fill(0).forEach((d,i) => {
     const [ x, y, z ] = points.slice(i*3,(i+1)*3);
-    // scratchObject3D.position.set(x*aspect, y, z);
     scratchObject3D.position.set(x, y, z);
     scratchObject3D.scale.setScalar(i === index ? selectedSize : sphereSize);
     scratchObject3D.updateMatrix();
@@ -52,7 +51,7 @@ export const InstancedPoints = ({
   const meshRef = useRef();
   const colorRef = useRef();
   const { scene, aspect } = useThree();
-  const { points, colors, pointsData } = data;
+  const { points, colors } = data;
   const colorArray = useMemo(() => new Float32Array(nPoints*3), [ nPoints ]);
   const { show, index } = selectedPoint;
 
@@ -110,23 +109,18 @@ export const InstancedPoints = ({
         <a.group
           position={ pointsAnim.interpolate((...d) => d.slice(index*3, (index+1)*3)) }
         >
-          <pointLight
-            distance={9}
-            position={[0, 0, 1.3]}
-            intensity={2.2}
-            decay={30}
-            color="#ffffff"
-          />
-          <pointLight
-            position={[0, 0, 0]}
-            decay={1}
-            distance={10}
-            intensity={5}
-            color="#ffffff"
-          />
+          {combinations(sphereSize*8, 3, true).map((d,i) => 
+            <pointLight
+              key={i}
+              distance={85}
+              position={d}
+              intensity={5}
+              decay={15}
+              color="#ffffff"
+            />
+          )}
         </a.group>
       )}
-      <HoverDialog {...{pointsAnim, selectedPoint, pointsData}} />
     </>
   );
 };

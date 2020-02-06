@@ -20,31 +20,24 @@ export default function Effects() {
   ]);
   useFrame(() => composer.current.render(), 1);
 
-  // const bloom = {
-  //   resolution: aspect,
-  //   strength: 0.6,
-  //   radius: 0.01,
-  //   threshold: 0.4,
-  // };
-
   const bloom = {
     resolution: aspect,
-    strength: 5.5,
-    radius: 0.01,
-    threshold: 0.6,
+    strength: 2,
+    radius: 0,
+    threshold: 0.1,
   };
 
   return (
     <effectComposer ref={composer} args={[gl]}>
-      <renderPass attachArray="passes" scene={scene} camera={camera} />
+      <renderPass attachArray='passes' scene={scene} camera={camera} />
 
       <unrealBloomPass
-        attachArray="passes"
+        attachArray='passes'
         args={[bloom.resolution, bloom.strength, bloom.radius, bloom.threshold]}
       />
 
       <shaderPass
-        attachArray="passes"
+        attachArray='passes'
         args={[FXAAShader]}
         material-uniforms-resolution-value={[1 / size.width, 1 / size.height]}
         renderToScreen

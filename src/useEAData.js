@@ -19,7 +19,7 @@ const getColor = d => {
       break;
 
     default:
-      color = new THREE.Color('#0000ff');
+      color = new THREE.Color('#0059c9');
   }
   return color.toArray();
 };

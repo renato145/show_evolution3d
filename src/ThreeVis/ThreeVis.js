@@ -28,12 +28,15 @@ export const ThreeVis = ({ data, sphereSize, nPoints, speed }) => {
         maxDistance={far}
         defaultPosition={defaultPosition}
       />
-      <ambientLight color="#ffffff" intensity={0.1} />
+      <ambientLight
+        color='#ffffff'
+        intensity={0.15}
+      />
       <hemisphereLight
-        color="#ffffff"
-        skyColor="#ffffbb"
-        groundColor="#080820"
-        intensity={1.0}
+        color='#ffffff'
+        skyColor='#ffffff'
+        groundColor='#000000'
+        intensity={0.7}
       />
       <InstancedPoints
         {...{data, sphereSize, nPoints, speed, selectedPoint, setSelectedPoint}}
