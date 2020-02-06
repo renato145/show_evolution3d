@@ -42,7 +42,10 @@ html, body, #root {
 }
 
 .hover-description {
-  background-color: rgba(255, 255, 255, 0.65);
+  position: absolute;
+  margin-left: 79%;
+  min-width: 21%;
+  background-color: rgba(255, 255, 255, 0.7);
   z-index: 100;
   padding: 5px;
   white-space: pre-line;

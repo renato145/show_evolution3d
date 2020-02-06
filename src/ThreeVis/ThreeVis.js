@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Canvas } from 'react-three-fiber';
 import { InstancedPoints } from './InstancedPoints';
 import { Controls } from './Controls';
@@ -8,11 +8,10 @@ import Effects from './Effects';
 const fov = 30;
 const near = 5;
 const far = 300;
-const defaultPosition = [0, 0, 110];
+const defaultPosition = [0, 0, 150];
+const grid = { size: 80, divisions: 10 };
 
-export const ThreeVis = ({ data, sphereSize, nPoints, speed }) => {
-  const [ selectedPoint, setSelectedPoint ] = useState({ show: false, index: 0});
-
+export const ThreeVis = ({ data, sphereSize, nPoints, speed, selectedPoint, setSelectedPoint }) => {
   return (
     <Canvas
       camera={{
@@ -40,6 +39,11 @@ export const ThreeVis = ({ data, sphereSize, nPoints, speed }) => {
       />
       <InstancedPoints
         {...{data, sphereSize, nPoints, speed, selectedPoint, setSelectedPoint}}
+      />
+      <gridHelper
+        args={[grid.size, grid.divisions]}
+        position={[0,-30,0]}
+        rotation={[0,0,0]}
       />
       <Effects />
     </Canvas>

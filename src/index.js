@@ -21,6 +21,7 @@ const App = () => {
   const [ fileData, setFileData ] = useState(null);
   const eaData = useEAData(fileData);
   const { n, nPoints, maxTime } = eaData;
+  const [ selectedPoint, setSelectedPoint ] = useState({ show: false, index: 0});
   const [ sphereSize, setSphereSize ] = useState(defaultSphereSize);
   const [ speed, setSpeed ] = useState(defaultSpeed);
   const [ time, setTime ] = useState(0);
@@ -39,7 +40,11 @@ const App = () => {
         <div className='time-dialog'>
           {`Time: ${data.thisTime}/${maxTime}`}
         </div>
-        <ThreeVis {...{data, sphereSize, nPoints, speed }} />
+        {selectedPoint.show && (<div className='hover-description'>
+            { data.pointsData[selectedPoint.index] }
+          </div>
+        )}
+        <ThreeVis {...{data, sphereSize, nPoints, speed, selectedPoint, setSelectedPoint }} />
       </div>
       <div className='html-bottom-container'>
         <ProgressBar

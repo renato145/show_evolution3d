@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useMemo } from 'react';
-import { useThree } from 'react-three-fiber';
+import { useThree, useFrame } from 'react-three-fiber';
 import { useSpring, a } from 'react-spring/three';
 import { useMousePointInteraction } from './useMousePointInteraction';
 import { combinations } from './utils';
@@ -93,7 +93,7 @@ export const InstancedPoints = ({
         onClick={handleClick}
         onPointerDown={handlePointerDown}
       >
-        <sphereBufferGeometry attach='geometry' args={[0.5, 8, 16]} >
+        <sphereBufferGeometry attach='geometry' args={[0.5, 16, 32]} >
           <instancedBufferAttribute
             ref={colorRef}
             attachObject={['attributes', 'color']}
