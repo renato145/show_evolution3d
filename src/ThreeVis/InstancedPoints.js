@@ -1,13 +1,20 @@
 import React, { useRef, useEffect, useMemo } from 'react';
-import { useThree, useFrame } from 'react-three-fiber';
-import { useSpring, a } from 'react-spring/three';
+import { useThree } from 'react-three-fiber';
+import { useSpring } from 'react-spring/three';
 import { useMousePointInteraction } from './useMousePointInteraction';
-import { combinations } from './utils';
+import { HighLights } from './HighLights';
 const THREE = require('three');
 
 // settings
 const backgroundColor = new THREE.Color('black');
 const selectedPointSize = 2;
+const lightConfig = {
+  margin: 5,
+  distance: 50,
+  intensity: 5,
+  decay: 15,
+  color: '#ffffff',
+};
 
 // re-use for instance computations
 const scratchObject3D = new THREE.Object3D();
@@ -84,6 +91,7 @@ export const InstancedPoints = ({
     onSelectPoint: setSelectedPoint
   });
 
+
   return (
     <>
       <instancedMesh
@@ -105,22 +113,12 @@ export const InstancedPoints = ({
           vertexColors={THREE.VertexColors}
         />
       </instancedMesh>
-      { show && (
-        <a.group
-          position={ pointsAnim.interpolate((...d) => d.slice(index*3, (index+1)*3)) }
-        >
-          {combinations(sphereSize*8, 3, true).map((d,i) => 
-            <pointLight
-              key={i}
-              distance={85}
-              position={d}
-              intensity={5}
-              decay={15}
-              color="#ffffff"
-            />
-          )}
-        </a.group>
-      )}
+     { show && (
+      <HighLights
+        animPosition={ pointsAnim.interpolate((...d) => d.slice(index*3, (index+1)*3)) }
+        lightConfig={lightConfig}
+      />
+     )}
     </>
   );
 };
