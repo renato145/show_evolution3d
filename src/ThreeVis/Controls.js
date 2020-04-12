@@ -48,9 +48,9 @@ export const Controls = ({ minDistance, maxDistance, defaultPosition }) => {
         CMD_KEY, // pan
       ]}
       mouseButtons={{
-        LEFT: THREE.MOUSE.PAN, // make pan the default instead of rotate
+        RIGHT: THREE.MOUSE.PAN,
         MIDDLE: THREE.MOUSE.ZOOM,
-        RIGHT: THREE.MOUSE.ROTATE,
+        LEFT: THREE.MOUSE.ROTATE,
       }}
     />
   );
